@@ -1,0 +1,67 @@
+<div>
+  <div class="submit-form">
+    <div *ngIf="!submitted">
+      <div class="form-group">
+        <label for="business_id">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="business_id"
+          required
+          [(ngModel)]="cliente.business_id"
+          name="business_id"
+        />
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input
+          type="text"
+          class="form-control"
+          id="phone"
+          required
+          [(ngModel)]="cliente.phone"
+          name="phone"
+        />
+      </div>
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input
+          type="text"
+          class="form-control"
+          id="email"
+          required
+          [(ngModel)]="cliente.email"
+          name="email"
+        />
+      </div>
+      <div class="form-group">
+        <label for="start_date">Start Date</label>
+        <input
+          type="datetime-local"
+          class="form-control"
+          id="start_date"
+          required
+          [(ngModel)]="cliente.start_date"
+          name="start_date"
+        />
+      </div>
+      <div class="form-group">
+        <label for="end_date">End Date</label>
+        <input
+          type="datetime-local"
+          class="form-control"
+          id="end_date"
+          required
+          [(ngModel)]="cliente.end_date"
+          name="end_date"
+        />
+      </div>
+      <button (click)="saveCliente()" class="btn btn-success">GUARDAR</button>
+    </div>
+
+    <div *ngIf="submitted">
+      <h4>Inserto correctamente el cliente...</h4>
+      <button class="btn btn-success" (click)="newCliente()">Add</button>
+    </div>
+  </div>
+</div>
