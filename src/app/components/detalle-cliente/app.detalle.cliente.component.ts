@@ -14,16 +14,18 @@ export class DetalleClienteComponent implements OnInit {
   
   
   @Input() currentCliente: Clientes = {
-    shared_key:'',
-    business_id: '',
-    phone:'',
-    email: '',
-    date_add: '',
-    start_date:'',
-    end_date:''
+    id:'',
+    numero_identificacion:'',
+    genero:'',
+    nombre:'',
+    tipo_identificacion:''
   };
   
   message = '';
+  id='';
+  TipoDoc = '';
+  genero="";
+
 
   constructor(
     private clienteService: ClienteService,
@@ -32,29 +34,37 @@ export class DetalleClienteComponent implements OnInit {
 
     ngOnInit(): void {
         this.message = '';
-        this.getClientes(this.route.snapshot.params["shared_key"]);
+        this.id=this.route.snapshot.params["id"];
     }
 
-  getClientes(id: string): void {
-    this.clienteService.get(id)
-      .subscribe({
-        next: (data) => {
-          this.currentCliente = data;
-          console.log(data);
-        },
-        error: (e) => console.error(e)
-      });
+    
+  onSelectedGenero(value:string): void {
+		this.genero = value;
+	}
+	
+  onSelectedTipoDoc(value:string): void {
+		this.TipoDoc = value;
+	}
+
+  back(){
+    this.router.navigate(['/ListarClientes/']);
   }
 
   actualizarClientes(): void {
     this.message = '';
-    this.clienteService.update(this.currentCliente.shared_key, this.currentCliente)
+    this.currentCliente.tipo_identificacion=this.TipoDoc;
+    this.currentCliente.genero=this.genero;
+    this.clienteService.update(this.id, this.currentCliente)
       .subscribe({
         next: (res) => {
           console.log(res);
-          this.message = res.message ? res.message : 'This tutorial was updated successfully!';
+          this.message = res.message ? res.message : 'este cliente fue actualizado exitosamente.!';
         },
         error: (e) => console.error(e)
       });
+      alert('Se actualizo correctamente');
+      this.router.navigate(['/ListarClientes/']);
+      
   }
+
 }

@@ -1,9 +1,9 @@
 export class Clientes {
-    shared_key?: any;
-    business_id?: string;
-    phone?: string;
-    email?: string;
-    date_add?:any;  
-    start_date?:any;
-    end_date?:any;
+ 
+  id?: any;
+  numero_identificacion?: string;
+  genero?: string;
+  nombre?:any;  
+  tipo_identificacion?:any;
+  
   }

@@ -7,10 +7,10 @@ import { DetalleClienteComponent } from './components/detalle-cliente/app.detall
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'tutorials', pathMatch: 'full' },
+  { path: '', redirectTo: 'Cliente', pathMatch: 'full' },
   { path: 'ListarClientes', component: ListarClientesComponent },
   { path: 'IngresarClientes', component: IngresarClientesComponent },
-  { path: 'DetalleClientes/:shared_key', component: DetalleClienteComponent },
+  { path: 'DetalleClientes/:id', component: DetalleClienteComponent },
 ];
 
 @NgModule({

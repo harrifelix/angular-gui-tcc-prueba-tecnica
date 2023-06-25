@@ -1,49 +1,71 @@
 
-  <div *ngIf="currentCliente.shared_key" class="edit-form">
+  <div class="edit-form">
     <h4>Edicion Cliente</h4>
     <form>
       <div class="form-group">
-        <label for="business_id">Business ID</label>
+        <label for="nombre">Numero identificación</label>
         <input
           type="text"
           class="form-control"
-          id="business_id"
-          [(ngModel)]="currentCliente.business_id"
-          name="business_id"
+          id="numero_identificacion"
+          [(ngModel)]="currentCliente.numero_identificacion"
+          name="numero_identificacion"
+        />
+      </div>
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input
+          type="text"
+          class="form-control"
+          id="nombre"
+          [(ngModel)]="currentCliente.nombre"
+          name="nombre"
         />
       </div>
 
       <div class="form-group">
-        <label for="business_id"></label>
-        <input
-          type="text"
-          class="form-control"
-          id="business_id"
-          [(ngModel)]="currentCliente.business_id"
-          name="business_id"
-        />
+        <label for="numero_documento"></label>    
+        <div class="form-group">
+          <label for="tipo_documento">Tipo Documento</label>       
+          <select #tipodoc (change)="onSelectedTipoDoc(tipodoc.value)"   id="tipo_documento" [(ngModel)]="currentCliente.tipo_identificacion" class="form-control">
+            <option default>Seleccione Documento</option>
+            <option>CC</option>
+            <option>CE</option>
+            <option>NIT</option>
+            <option>TI</option>
+          </select>
+     
       </div>
-
- 
       <div class="form-group">
-        <label for="email">Email</label>
-        <input
-          type="text"
-          class="form-control"
-          id="email"
-          [(ngModel)]="currentCliente.email"
-          name="email"
-        />
+          <label for="genero">Genero</label>       
+        <select #genero (change)="onSelectedGenero(genero.value)"   id="genero" [(ngModel)]="currentCliente.genero" class="form-control">
+          <option default>Seleccione Genero</option>
+          <option>Masculino</option>
+          <option>Femenino</option>
+          <option>Otro</option>
+        </select>
       </div>
 
-    </form>
+      <div class="form-group">
     <button
       type="submit"
-      class="badge badge-success mb-2"
+      class="btn-primary"
       (click)="actualizarClientes()"
     >
       Actualizar
     </button>
+    &nbsp;
+    &nbsp;
+    <button
+    type="submit"
+    class="btn-primary"
+    (click)="back()"
+  >
+    Atras
+  </button>
+      </div>
+
     <p>{{ message }}</p>
   </div>
 
+</form>

@@ -12,7 +12,7 @@ export class ListarClientesComponent implements OnInit {
   clientes?: Clientes[];
   currentDatoCliente: Clientes = {};
   currentIndex = -1;
-  email = '';
+  numero_documento = '';
   element=false;
 
   constructor(private clienteService: ClienteService,private router: Router) { }
@@ -38,28 +38,38 @@ export class ListarClientesComponent implements OnInit {
     this.currentIndex = -1;
   }
 
-  busquedaAvanzada():void{
-     this.element=true;
-  }
 
   setActiveClientes(cliente: Clientes, index: number): void {
     this.currentDatoCliente = cliente;
     this.currentIndex = index;
   }
 
-  editClientes(clientes: Clientes, index: number):void{
- 
-  }
 
   Editar(cliente:Clientes): void {
-    this.router.navigate(['/DetalleClientes/'+cliente.shared_key]);
+    this.router.navigate(['/DetalleClientes/'+cliente.id]);
+  }
+
+  Eliminar(cliente:Clientes): void {
+
+    this.clienteService.eliminar(cliente.id)
+      .subscribe({
+        next: (data) => {
+          this.clientes = data;
+          console.log(data);
+          this.refreshList();
+        },
+        error: (e) => console.error(e)
+      });
+    
   }
 
   buscarClientes(): void {
     this.currentDatoCliente = {};
     this.currentIndex = -1;
+   
+    if(this.numero_documento==""){this.refreshList();}
     
-    this.clienteService.findByTitle(this.email)
+    this.clienteService.findByNumeroDoc(this.numero_documento)
       .subscribe({
         next: (data) => {
           this.clientes = data;
@@ -72,8 +82,4 @@ export class ListarClientesComponent implements OnInit {
   insertarClientes():void{
     this.router.navigate(['/IngresarClientes']);
   }
-
-  exportarCSV():void{
-  }
-
 }

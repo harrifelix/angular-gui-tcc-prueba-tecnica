@@ -2,66 +2,60 @@
   <div class="submit-form">
     <div *ngIf="!submitted">
       <div class="form-group">
-        <label for="business_id">Name</label>
+        <label for="nombre">Nombre</label>
         <input
           type="text"
           class="form-control"
-          id="business_id"
+          id="nombre"
           required
-          [(ngModel)]="cliente.business_id"
-          name="business_id"
+          [(ngModel)]="cliente.nombre"
+          name="nombre"
         />
       </div>
       <div class="form-group">
-        <label for="phone">Phone</label>
-        <input
-          type="text"
-          class="form-control"
-          id="phone"
-          required
-          [(ngModel)]="cliente.phone"
-          name="phone"
-        />
-      </div>
-      <div class="form-group">
-        <label for="email">E-mail</label>
-        <input
-          type="text"
-          class="form-control"
-          id="email"
-          required
-          [(ngModel)]="cliente.email"
-          name="email"
-        />
-      </div>
-      <div class="form-group">
-        <label for="start_date">Start Date</label>
-        <input
-          type="datetime-local"
-          class="form-control"
-          id="start_date"
-          required
-          [(ngModel)]="cliente.start_date"
-          name="start_date"
-        />
-      </div>
-      <div class="form-group">
-        <label for="end_date">End Date</label>
-        <input
-          type="datetime-local"
-          class="form-control"
-          id="end_date"
-          required
-          [(ngModel)]="cliente.end_date"
-          name="end_date"
-        />
-      </div>
-      <button (click)="saveCliente()" class="btn btn-success">GUARDAR</button>
+        <label for="genero">Genero</label>       
+      <select #genero (change)="onSelectedGenero(genero.value)"   id="genero" [(ngModel)]="cliente.genero" class="form-control">
+        <option default>Seleccione Genero</option>
+        <option>Masculino</option>
+        <option>Femenino</option>
+        <option>Otro</option>
+      </select>
     </div>
 
-    <div *ngIf="submitted">
-      <h4>Inserto correctamente el cliente...</h4>
-      <button class="btn btn-success" (click)="newCliente()">Add</button>
+       
+      <div class="form-group">
+        <label for="numero_identificacion">Numero Documento</label>
+        <input
+          type="text"
+          class="form-control"
+          id="numero_identificacion"
+          required
+          [(ngModel)]="cliente.numero_identificacion"
+          name="numero_identificacion"
+        />
+      </div>
+      
+    
+      <div class="form-group">
+        <label for="numero_documento"></label>    
+        <div class="form-group">
+          <label for="tipo_documento">Tipo Documento</label>       
+          <select #tipodoc (change)="onSelectedTipoDoc(tipodoc.value)"   id="tipo_documento" [(ngModel)]="cliente.tipo_identificacion" class="form-control">
+            <option default>Seleccione Documento</option>
+            <option>CC</option>
+            <option>CE</option>
+            <option>NIT</option>
+            <option>TI</option>
+          </select>
+     
+      </div>
+       
+        <button (click)="saveCliente()" class="btn btn-success">GUARDAR</button>
+      </div>
+  
+      </div>
+    
     </div>
+
   </div>
-</div>
+

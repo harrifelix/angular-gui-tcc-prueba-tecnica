@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ClienteService } from '../../services/api';
 import { Clientes } from '../../models/clientes';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ingresar-clientes',
@@ -9,88 +10,81 @@ import { Clientes } from '../../models/clientes';
 export class IngresarClientesComponent {
  
   cliente: Clientes = {
-    shared_key:'',
-    business_id: '',
-    phone:'',
-    email: '',
-    date_add: '',
-    start_date:'',
-    end_date:''
+    numero_identificacion:'',
+    genero:'',
+    nombre:'',
+    tipo_identificacion:''
   };
   
-  
-  reCorto = /\S+@\S+\.\S+/;
   submitted = false;
+  message="";
+  TipoDocumento = '';
+  genero="";
 
-  constructor(private clienteService: ClienteService) { }
+  constructor(private clienteService: ClienteService, private router: Router) { }
 
   saveCliente(): void {
     const data = {
-      shared_key:this.cliente.shared_key,
-      business_id: this.cliente.business_id,
-      email: this.cliente.email,
-      phone:this.cliente.phone,
-      start_date:this.cliente.start_date,
-      end_date:this.cliente.end_date
+      nombre: this.cliente.nombre,
+      tipo_identificacion: this.TipoDocumento,
+      numero_identificacion:this.cliente.numero_identificacion,
+      genero:this.genero
     
     };
 
     if(!this.validarCampos(data)){return; }
   
-    if(!this.validarCorreo(data.email)){  return; }
-   
     this.clienteService.create(data)
       .subscribe({
         next: (res) => {
           console.log(res);
+          this.message = res.message ? res.message : 'este cliente fue insertado exitosamente.!';
           this.submitted = true;
         },
         error: (e) => console.error(e)
       });
+      alert('Se guardo correctamente');
+      this.router.navigate(['/ListarClientes/']);
   }
 
-  validarCorreo(email:any):Boolean{
-      if(!this.reCorto.test(email)){
-          alert('Correo invalido validelo...')
-          return false;
-      }
-      return true;
-  }
+	
+  onSelectedGenero(value:string): void {
+		this.genero = value;
+	}
+	
+  onSelectedTipoDoc(value:string): void {
+		this.TipoDocumento = value;
+	}
 
   validarCampos(cliente:any):Boolean{
-    if(cliente.phone===''){
+    if(cliente.nombre===''){
      alert('el campo telefono se encuentra vacio valide..');
      return false;
     }
-    else if(cliente.business_id===''){
+    else if(cliente.genero===''){
       alert('el campo name  se encuentra vacio valide..');
       return false;
     }
-    else if(cliente.email===''){
+    else if(cliente.tipo_documento===''){
       alert('el campo name  se encuentra vacio valide..');
       return false;
     }
-    else if(cliente.start_date===''){
+    else if(cliente.numero_documento===''){
       alert('el campo fecha inicio  se encuentra vacio valide..');
       return false;
     }
-    else if(cliente.end_date===''){
-      alert('el campo fecha fin  se encuentra vacio valide..');
-      return false;
-    }
+    
     return true;
 }
+
 
   newCliente(): void {
     this.submitted = false;
     this.cliente = {
-      shared_key:'',
-      business_id: '',
-      phone:'',
-      email: '',
-      date_add: '',
-      start_date:'',
-      end_date:''
+      nombre: '',
+      numero_identificacion:'',
+      tipo_identificacion: '',
+      genero: ''
     };
   }
 }

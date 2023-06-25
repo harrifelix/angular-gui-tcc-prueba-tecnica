@@ -17,19 +17,26 @@ export class ClienteService {
   }
 
   get(id: any): Observable<Clientes> {
-    return this.http.get<Clientes>(`${baseUrl}/api/buscarById/${id}`);
+    return this.http.get<Clientes>(`${baseUrl}/api/buscarByDoc/${id}`);
   }
 
   create(data: any): Observable<any> {
-    console.log(data);
     return this.http.post(`${baseUrl}/api/guardar`, data);
   }
 
   update(id: any, data: any): Observable<any> {
-    return this.http.post(`${baseUrl}/api/actualizar`, data);
+    return this.http.put(`${baseUrl}/api/actualizar/${id}`, data);
   }
 
-  findByTitle(sharedKey: any): Observable<Clientes[]> {   
-    return this.http.get<Clientes[]>(`${baseUrl}/api/buscarBySharedKey/${sharedKey}`);
+  eliminar(Doc: any): Observable<Clientes[]> {  
+    return this.http.delete<Clientes[]>(`${baseUrl}/api/eliminar/${Doc}`);
+  }
+
+  findByNumeroDoc(Doc: any): Observable<Clientes[]> {   
+    return this.http.get<Clientes[]>(`${baseUrl}/api/buscarByDoc/${Doc}`);
+  }
+
+  findByViewEdit(Doc: any): Observable<Clientes[]> {   
+    return this.http.get<Clientes[]>(`${baseUrl}/api/buscarByDocView/${Doc}`);
   }
 }
