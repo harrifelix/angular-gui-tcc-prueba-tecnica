@@ -22,10 +22,10 @@ export class DetalleClienteComponent implements OnInit {
   };
   
   message = '';
-  id='';
+  ids='';
   TipoDoc = '';
-  genero="";
-
+  generos="";
+  
 
   constructor(
     private clienteService: ClienteService,
@@ -34,12 +34,16 @@ export class DetalleClienteComponent implements OnInit {
 
     ngOnInit(): void {
         this.message = '';
-        this.id=this.route.snapshot.params["id"];
+        this.ids=this.route.snapshot.params["id"];
+        this.currentCliente.nombre=this.route.snapshot.params["nombre"];
+        this.currentCliente.genero=this.route.snapshot.params["genero"];
+        this.currentCliente.numero_identificacion=this.route.snapshot.params["doc"];
+        this.currentCliente.tipo_identificacion=this.route.snapshot.params["tipodoc"];
     }
 
     
   onSelectedGenero(value:string): void {
-		this.genero = value;
+		this.generos = value;
 	}
 	
   onSelectedTipoDoc(value:string): void {
@@ -53,8 +57,8 @@ export class DetalleClienteComponent implements OnInit {
   actualizarClientes(): void {
     this.message = '';
     this.currentCliente.tipo_identificacion=this.TipoDoc;
-    this.currentCliente.genero=this.genero;
-    this.clienteService.update(this.id, this.currentCliente)
+    this.currentCliente.genero=this.generos;
+    this.clienteService.update(this.ids, this.currentCliente)
       .subscribe({
         next: (res) => {
           console.log(res);
@@ -66,5 +70,4 @@ export class DetalleClienteComponent implements OnInit {
       this.router.navigate(['/ListarClientes/']);
       
   }
-
 }

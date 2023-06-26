@@ -6,7 +6,6 @@ import { Clientes } from '../models/clientes';
 
 const baseUrl = 'http://localhost:8444';
 
-
 @Injectable()
 export class ClienteService {
 

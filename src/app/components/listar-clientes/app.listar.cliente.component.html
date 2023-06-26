@@ -1,7 +1,8 @@
 <div class="col-md-6">
-<button type="button" class="btn btn-primary" (click)="insertarClientes()" >New+</button>
+<button type="button" class="btn btn-primary" (click)="insertarClientes()" >Agregar un nuevo registro +</button>
 </div>
-
+&nbsp;
+&nbsp;
 <div class="list row">
   <div class="col-md-8">
     <div class="input-group mb-3">
@@ -13,12 +14,24 @@
       [(ngModel)]="numero_documento"
       name="nombre"
     />    
+    &nbsp;
+    &nbsp;
       <div class="input-group-append">
         <button
           class="btn btn-outline-secondary"
           (click)="buscarClientes()"
         >
           Search
+        </button>
+        &nbsp;
+        &nbsp;
+      </div>
+      <div class="input-group-append">
+        <button
+          class="btn btn-outline-secondary"
+          (click)="LimpiarCampoBusqueda()"
+        >
+          Limpiar Busqueda
         </button>
       </div>
 

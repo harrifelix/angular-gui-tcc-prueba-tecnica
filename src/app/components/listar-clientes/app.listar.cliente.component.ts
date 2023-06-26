@@ -44,9 +44,13 @@ export class ListarClientesComponent implements OnInit {
     this.currentIndex = index;
   }
 
+  LimpiarCampoBusqueda(){
+        this.numero_documento='';
+        this.refreshList();
+  }
 
   Editar(cliente:Clientes): void {
-    this.router.navigate(['/DetalleClientes/'+cliente.id]);
+    this.router.navigate(['/DetalleClientes/'+cliente.id+'/'+cliente.genero+'/'+cliente.tipo_identificacion+'/'+cliente.nombre+'/'+cliente.numero_identificacion]);
   }
 
   Eliminar(cliente:Clientes): void {
@@ -59,8 +63,7 @@ export class ListarClientesComponent implements OnInit {
           this.refreshList();
         },
         error: (e) => console.error(e)
-      });
-    
+      });    
   }
 
   buscarClientes(): void {
