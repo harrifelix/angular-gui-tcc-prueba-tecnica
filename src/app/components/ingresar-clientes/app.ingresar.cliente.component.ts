@@ -58,25 +58,28 @@ export class IngresarClientesComponent {
 
   validarCampos(cliente:any):Boolean{
     if(cliente.nombre===''){
-     alert('el campo telefono se encuentra vacio valide..');
+     alert('el campo nombre se encuentra vacio valide..');
      return false;
     }
     else if(cliente.genero===''){
-      alert('el campo name  se encuentra vacio valide..');
+      alert('el campo genero  se encuentra vacio valide..');
       return false;
     }
     else if(cliente.tipo_documento===''){
-      alert('el campo name  se encuentra vacio valide..');
+      alert('el campo tipo documento  se encuentra vacio valide..');
       return false;
     }
     else if(cliente.numero_documento===''){
-      alert('el campo fecha inicio  se encuentra vacio valide..');
+      alert('el campo numero documento  se encuentra vacio valide..');
       return false;
     }
     
     return true;
 }
 
+back(){
+  this.router.navigate(['/ListarClientes/']);
+}
 
   newCliente(): void {
     this.submitted = false;
